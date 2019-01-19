@@ -26,9 +26,9 @@ function formatNumber(value: number, decimals?: ?number): string {
 function getAtLeastString(maxnumber: number, decimals?: ?number): string {
   const result = (
     <fbt desc="Label with meaning 'at least number'" project="locale_data">
-      <fbt:param name="number" number={maxnumber}>
+      <fbtParam name="number" number={maxnumber}>
         {intlNumUtils.formatNumberWithThousandDelimiters(maxnumber, decimals)}
-      </fbt:param>+
+      </fbtParam>+
     </fbt>
   );
   // after we start using CLDR data, it will not be fbt anymore.
@@ -38,9 +38,9 @@ function getAtLeastString(maxnumber: number, decimals?: ?number): string {
 function getLessThanString(minnumber: number, decimals?: ?number): string {
   const result = (
     <fbt desc="Label with meaning 'less than number'" project="locale_data">
-      &lt;<fbt:param name="number" number={minnumber}>
+      &lt;<fbtParam name="number" number={minnumber}>
         {intlNumUtils.formatNumberWithThousandDelimiters(minnumber, decimals)}
-      </fbt:param>
+      </fbtParam>
     </fbt>
   );
   // after we start using CLDR data, it will not be fbt anymore.
