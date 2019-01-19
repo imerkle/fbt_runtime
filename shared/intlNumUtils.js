@@ -9,7 +9,7 @@
  * Run the following command to sync the change from www to fbsource.
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
- *      
+ * @flow
  * @typechecks
  * @format
  * @emails oncall+internationalization
@@ -22,10 +22,10 @@ const NumberFormatConfig = NumberFormatConsts.get(IntlViewerContext.locale);
 const escapeRegex = require('escapeRegex');
 
 const DEFAULT_GROUPING_SIZE = 3;
-             
-                             
-                      
-                            
+import type {
+  StandardDecimalPatternInfo,
+  NumberingSystemData,
+} from 'NumberFormatConfig';
 
 const CURRENCIES_WITH_DOTS = [
   '\u0433\u0440\u043d.',
@@ -60,7 +60,7 @@ const CURRENCIES_WITH_DOTS = [
 ];
 
 const _regexCache = {};
-function _buildRegex(pattern        )         {
+function _buildRegex(pattern: string): RegExp {
   if (!_regexCache[pattern]) {
     _regexCache[pattern] = new RegExp(pattern, 'i');
   }
@@ -81,14 +81,14 @@ const matchCurrenciesWithDots = _buildRegex(
  * `formatNumberWithThousandDelimiters` below.
  */
 function formatNumberRaw(
-  value     ,
-  decimals          ,
-  thousandDelimiter         ,
-  decimalDelimiter         ,
-  minDigitsForThousandDelimiter         ,
-  standardPatternInfo                             ,
-  numberingSystemData                       ,
-)         {
+  value: any,
+  decimals?: ?number,
+  thousandDelimiter?: string,
+  decimalDelimiter?: string,
+  minDigitsForThousandDelimiter?: number,
+  standardPatternInfo?: StandardDecimalPatternInfo,
+  numberingSystemData?: ?NumberingSystemData,
+): string {
   thousandDelimiter = thousandDelimiter || '';
   decimalDelimiter = decimalDelimiter || '.';
   minDigitsForThousandDelimiter = minDigitsForThousandDelimiter || 0;
@@ -153,7 +153,7 @@ function formatNumberRaw(
   return result;
 }
 
-function _replaceWithNativeDigits(number        , digits        )         {
+function _replaceWithNativeDigits(number: string, digits: string): string {
   let result = '';
   for (let ii = 0; ii < number.length; ++ii) {
     const d = digits[number.charCodeAt(ii) - 48]; /* 48 === '0' */
@@ -173,7 +173,7 @@ function _replaceWithNativeDigits(number        , digits        )         {
  * be displayed. For instance, pass `0` to round to the nearest
  * integer, `2` to round to nearest cent when displaying currency, etc.
  */
-function formatNumber(value        , decimals          )         {
+function formatNumber(value: number, decimals?: ?number): string {
   return formatNumberRaw(
     value,
     decimals,
@@ -197,9 +197,9 @@ function formatNumber(value        , decimals          )         {
  * integer, `2` to round to nearest cent when displaying currency, etc.
  */
 function formatNumberWithThousandDelimiters(
-  value        ,
-  decimals          ,
-)         {
+  value: number,
+  decimals?: ?number,
+): string {
   return formatNumberRaw(
     value,
     decimals,
@@ -216,7 +216,7 @@ function formatNumberWithThousandDelimiters(
  * I.e. 1.23 has 0, 100 and 999 have 2, and 1000 has 3.
  * Used in the inflation and rounding calculations below.
  */
-function _getNumberOfPowersOfTen(value        )         {
+function _getNumberOfPowersOfTen(value: number): number {
   return value && Math.floor(Math.log10(Math.abs(value)));
 }
 
@@ -237,10 +237,10 @@ function _getNumberOfPowersOfTen(value        )         {
  * "1.20"
  */
 function formatNumberWithLimitedSigFig(
-  value        ,
-  decimals         ,
-  numSigFigs        ,
-)         {
+  value: number,
+  decimals: ?number,
+  numSigFigs: number,
+): string {
   // First make the number sufficiently integer-like.
   const power = _getNumberOfPowersOfTen(value);
   let inflatedValue = value;
@@ -268,7 +268,7 @@ function formatNumberWithLimitedSigFig(
   return formatNumberWithThousandDelimiters(truncatedValue, decimals);
 }
 
-function _roundNumber(valueParam        , decimalsParam         )         {
+function _roundNumber(valueParam: number, decimalsParam?: number): string {
   const decimals = decimalsParam == null ? 0 : decimalsParam;
   const pow = Math.pow(10, decimals);
   let value = valueParam;
@@ -306,7 +306,7 @@ const addZeros = (x, count) => {
   return x;
 };
 
-function truncateLongNumber(number        , decimals         )         {
+function truncateLongNumber(number: string, decimals?: number): string {
   const pos = number.indexOf('.');
   const dividend = pos === -1 ? number : number.slice(0, pos);
   const remainder = pos === -1 ? '' : number.slice(pos + 1);
@@ -341,10 +341,10 @@ const decimalSeparatorRegex = separator => {
  * exactly what you're doing. Consider using `parseNumber` below.
  */
 function parseNumberRaw(
-  text        ,
-  decimalDelimiter        ,
-  numberDelimiter         ,
-)          {
+  text: string,
+  decimalDelimiter: string,
+  numberDelimiter?: string,
+): ?number {
   // Replace numerals based on current locale data
   const digitsMap = _getNativeDigitsMap();
   if (digitsMap) {
@@ -393,7 +393,7 @@ function parseNumberRaw(
  * A codified number has \u0001 in the place of a decimal separator and a
  * \u0002 in the place of a negative sign.
  */
-function _parseCodifiedNumber(text        )          {
+function _parseCodifiedNumber(text: string): ?number {
   text = text
     .replace(/[^0-9\u0001\u0002]/g, '') // remove everything but numbers,
     // decimal separator and negative sign
@@ -403,7 +403,7 @@ function _parseCodifiedNumber(text        )          {
   return text === '' || isNaN(value) ? null : value;
 }
 
-function _getNativeDigitsMap()                      {
+function _getNativeDigitsMap(): ?{[string]: string} {
   const nativeDigitMap = {};
   const digits =
     NumberFormatConfig.numberingSystemData &&
@@ -418,7 +418,7 @@ function _getNativeDigitsMap()                      {
   return nativeDigitMap;
 }
 
-function parseNumber(text        )          {
+function parseNumber(text: string): ?number {
   return parseNumberRaw(
     text,
     NumberFormatConfig.decimalSeparator || '.',
@@ -444,10 +444,10 @@ const intlNumUtils = {
    *
    */
   getFloatString(
-    num                 ,
-    thousandDelimiter        ,
-    decimalDelimiter        ,
-  )         {
+    num: string | number,
+    thousandDelimiter: string,
+    decimalDelimiter: string,
+  ): string {
     const str = String(num);
     const pieces = str.split('.');
 
@@ -467,7 +467,7 @@ const intlNumUtils = {
    * edge cases for Norwegian and Spanish right.
    *
    */
-  getIntegerString(num                 , thousandDelimiter        )         {
+  getIntegerString(num: string | number, thousandDelimiter: string): string {
     if (thousandDelimiter === '') {
       if (__DEV__) {
         throw new Error('thousandDelimiter cannot be empty string!');

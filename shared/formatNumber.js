@@ -10,7 +10,7 @@
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
  * @format
- *       strict-local
+ * @flow strict-local
  * @emails oncall+internationalization
  */
 
@@ -19,11 +19,11 @@
 const fbt = require('fbt');
 const intlNumUtils = require('intlNumUtils');
 
-function formatNumber(value        , decimals          )         {
+function formatNumber(value: number, decimals?: ?number): string {
   return intlNumUtils.formatNumber(value, decimals);
 }
 
-function getAtLeastString(maxnumber        , decimals          )         {
+function getAtLeastString(maxnumber: number, decimals?: ?number): string {
   const result = (
     <fbt desc="Label with meaning 'at least number'" project="locale_data">
       <fbt:param name="number" number={maxnumber}>
@@ -35,7 +35,7 @@ function getAtLeastString(maxnumber        , decimals          )         {
   return result.toString();
 }
 
-function getLessThanString(minnumber        , decimals          )         {
+function getLessThanString(minnumber: number, decimals?: ?number): string {
   const result = (
     <fbt desc="Label with meaning 'less than number'" project="locale_data">
       &lt;<fbt:param name="number" number={minnumber}>
@@ -48,20 +48,20 @@ function getLessThanString(minnumber        , decimals          )         {
 }
 
 function formatNumberWithMaxLimit(
-  value        ,
-  maxvalue        ,
-  decimals          ,
-)         {
+  value: number,
+  maxvalue: number,
+  decimals?: ?number,
+): string {
   return value > maxvalue
     ? getAtLeastString(maxvalue, decimals)
     : intlNumUtils.formatNumberWithThousandDelimiters(value, decimals);
 }
 
 function formatNumberWithMinLimit(
-  value        ,
-  minvalue        ,
-  decimals          ,
-)         {
+  value: number,
+  minvalue: number,
+  decimals?: ?number,
+): string {
   return value < minvalue
     ? getLessThanString(minvalue, decimals)
     : intlNumUtils.formatNumberWithThousandDelimiters(value, decimals);

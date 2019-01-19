@@ -2,11 +2,11 @@
  * Copyright 2015-present Facebook. All Rights Reserved.
  *
  * @format
- *       strict-local
+ * @flow strict-local
  * @emails oncall+internationalization
  */
 
-                                                         
+import type {NestedFbtContentItems} from 'FbtResultBase';
 
 const FbtReactUtil = require('FbtReactUtil');
 const FbtResultBaseImpl = require('FbtResultBaseImpl');
@@ -49,29 +49,29 @@ function em(content, inlineMode, translation, hash) {
   };
 }
 
-const InlineFbtComponent = (props       )        =>
+const InlineFbtComponent = (props: Props): mixed =>
   em(props.content, props.inlineMode, props.translation, props.hash);
 
-              
-                                 
-                      
-                      
-                
-  
+type Props = {
+  content: NestedFbtContentItems,
+  inlineMode: boolean,
+  translation: string,
+  hash: ?string,
+};
 
 class InlineFbtResult extends FbtResultBaseImpl {
-  $$typeof                                     =
+  $$typeof: Symbol | $TEMPORARY$number<0xeac7> =
     FbtReactUtil.REACT_ELEMENT_TYPE;
-  key          = null;
-               
-  ref                                = null;
-  type                          = InlineFbtComponent;
+  key: ?string = null;
+  props: Props;
+  ref: ?React$Ref<React$ElementType> = null;
+  type: (props: Props) => mixed = InlineFbtComponent;
 
   constructor(
-    contents                       ,
-    inlineMode         ,
-    translation        ,
-    hash         ,
+    contents: NestedFbtContentItems,
+    inlineMode: boolean,
+    translation: string,
+    hash: ?string,
   ) {
     super(contents);
     /* eslint-disable fb-www/react-state-props-mutation */

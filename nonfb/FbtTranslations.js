@@ -4,7 +4,7 @@
  * Dummy class on www. Fetches translations from language packs on RN/CS.
  *
  * @emails oncall+internationalization
- *      
+ * @flow
  * @format
  */
 
@@ -15,10 +15,10 @@ const IntlViewerContext = require('IntlViewerContext');
 const translatedFbts = require('translatedFbts.json');
 
 function getTranslatedPayload(
-  hashKey         ,
-  enumHashKey            ,
-  args                   ,
-)             {
+  hashKey: ?string,
+  enumHashKey: $FlowFixMe,
+  args: Array<$FlowFixMe>,
+): $FlowFixMe {
   const table = translatedFbts && translatedFbts[IntlViewerContext.locale];
   if (!table || !table[hashKey]) {
     return null;
@@ -29,7 +29,7 @@ function getTranslatedPayload(
   };
 }
 
-function isComponentScript()          {
+function isComponentScript(): boolean {
   return false;
 }
 

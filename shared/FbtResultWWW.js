@@ -1,26 +1,26 @@
 /**
  * Copyright 2004-present Facebook. All Rights Reserved.
  *
- *      
+ * @flow
  * @format
  * @emails oncall+internationalization
  */
 
 'use strict';
 
-             
-                                    
-                                                  
-                       
+import type {
+  FbtContentItem as _FbtContentItem,
+  NestedFbtContentItems as _NestedFbtContentItems,
+} from 'FbtResultBase';
 
-                                             
-                                                           
+export type FbtContentItem = _FbtContentItem;
+export type NestedFbtContentItems = _NestedFbtContentItems;
 
 const FBLogger = require('FBLogger');
 const FbtResultBase = require('FbtResultBase');
 const killswitch = require('killswitch');
 
-function logErrorUseStringMethod(methodName        )       {
+function logErrorUseStringMethod(methodName: string): void {
   // If the contents is array of length greater than one, then use the string
   // method will cause error
   FBLogger('fbt')
@@ -37,7 +37,7 @@ function logErrorUseStringMethod(methodName        )       {
  * The FbtResultBase "implemented" module for www.
  */
 class FbtResultWWW extends FbtResultBase {
-  onStringSerializationError(content                )       {
+  onStringSerializationError(content: FbtContentItem): void {
     let details = 'Context not logged.';
     if (!killswitch('JS_RELIABILITY_FBT_LOGGING')) {
       try {
@@ -54,7 +54,7 @@ class FbtResultWWW extends FbtResultBase {
 }
 
 const FbtResultWWWWithStringishMethods = FbtResultWWW.usingStringProxyMethod(
-  (methodName                      ) => {
+  (methodName: $Keys<IFbtStringish>) => {
     return function() {
       logErrorUseStringMethod(methodName);
       // $FlowFixMe Mock stringish methods

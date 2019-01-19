@@ -17,7 +17,7 @@
  * @format
  * @fbt {"project": "intl-core"}
  * @typechecks
- *      
+ * @flow
  * @emails oncall+internationalization
  */
 
@@ -39,11 +39,11 @@ const DELIMITERS = {
   SEMICOLON: 'SEMICOLON',
 };
 
-const intlList = function                   (
-  items                       ,
-  conjunction                             ,
-  delimiter                           ,
-)              {
+const intlList = function<TItem: React.Node>(
+  items: $ReadOnlyArray<TItem>,
+  conjunction: ?$Keys<typeof CONJUNCTIONS>,
+  delimiter: ?$Keys<typeof DELIMITERS>,
+): TItem | Fbt {
   if (__DEV__) {
     items.forEach(function(item) {
       invariant(
@@ -103,11 +103,11 @@ const intlList = function                   (
 };
 
 function _getConjunction(
-  list            ,
-  lastItem            ,
-  conjunction                            ,
-  delimiter                           ,
-)      {
+  list: React.Node,
+  lastItem: React.Node,
+  conjunction: $Keys<typeof CONJUNCTIONS>,
+  delimiter: ?$Keys<typeof DELIMITERS>,
+): Fbt {
   switch (conjunction) {
     case CONJUNCTIONS.AND:
       return (

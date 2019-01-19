@@ -10,7 +10,7 @@
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
  * @format
- *       strict-local
+ * @flow strict-local
  * @emails oncall+internationalization
  */
 

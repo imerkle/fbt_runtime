@@ -10,7 +10,7 @@
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
  * @format
- *      
+ * @flow
  * @emails oncall+internationalization
  */
 
@@ -27,7 +27,7 @@ const parameterRegexp = new RegExp(
 );
 
 // Hack into React internals to avoid key warnings
-function markAsSafeForReact           (object   )    {
+function markAsSafeForReact<T: Object>(object: T): T {
   if (__DEV__) {
     // If this looks like a ReactElement, mark it as safe to silence any
     // key warnings.
@@ -52,9 +52,9 @@ function markAsSafeForReact           (object   )    {
  * Used for in-place substitutions in translation mode.
  */
 function substituteTokens(
-  template        ,
-  _args         ,
-)                      {
+  template: string,
+  _args?: Object,
+): string | Array<any> {
   const args = _args;
 
   if (!args) {

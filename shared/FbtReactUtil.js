@@ -10,21 +10,21 @@
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
  * @format
- *      
+ * @flow
  * @emails oncall+internationalization
  */
 
 const REACT_ELEMENT_TYPE = ((typeof Symbol === 'function' &&
   Symbol.for &&
   Symbol.for('react.element')) ||
-  0xeac7                                    );
+  0xeac7: Symbol | $TEMPORARY$number<0xeac7>);
 
 let canDefineProperty = false;
 if (__DEV__) {
   try {
     Object.defineProperty({}, 'x', {});
     canDefineProperty = true;
-  } catch(e){
+  } catch {
     // IE will fail on defineProperty
   }
 }
@@ -32,7 +32,7 @@ if (__DEV__) {
 const FbtReactUtil = {
   REACT_ELEMENT_TYPE: REACT_ELEMENT_TYPE,
 
-  defineProperty: function(target        , storeKey        , value        ) {
+  defineProperty: function(target: Object, storeKey: string, value: Object) {
     if (canDefineProperty) {
       Object.defineProperty(target, storeKey, {
         configurable: false,

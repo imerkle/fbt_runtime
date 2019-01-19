@@ -1,6 +1,6 @@
 /**
  * Copyright 2004-present Facebook. All Rights Reserved.
  * @format
- *       strict-local
+ * @flow strict-local
  */
 module.exports = require('IntlVariationResolverImpl');

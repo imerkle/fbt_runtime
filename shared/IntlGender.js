@@ -9,14 +9,14 @@
  * Run the following command to sync the change from www to fbsource.
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
- *       strict
+ * @flow strict
  * @format
  * @emails oncall+internationalization
  */
 
 'use strict';
 
-                                                               
+import type {DisplayGenderConstType} from 'DisplayGenderConst';
 
 const DisplayGenderConst = require('DisplayGenderConst');
 const GenderConst = require('GenderConst');
@@ -27,7 +27,7 @@ const invariant = require('invariant');
  * Map an array of genders to a single value.
  * Logic here mirrors that of :fbt:pronoun::render().
  */
-function fromMultiple(genders               )         {
+function fromMultiple(genders: Array<number>): number {
   invariant(0 < genders.length, 'Cannot have pronoun for zero people');
   return genders.length === 1 ? genders[0] : GenderConst.UNKNOWN_PLURAL;
 }
@@ -36,7 +36,7 @@ function fromMultiple(genders               )         {
  * Maps a DisplayGenderConst value (usually retrieved through the Gender
  * GraphQL type) to a GenderConst value usable by Fbt.
  */
-function fromDisplayGender(gender                        )         {
+function fromDisplayGender(gender: DisplayGenderConstType): number {
   switch (gender) {
     case DisplayGenderConst.MALE:
       return GenderConst.MALE_SINGULAR;

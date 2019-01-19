@@ -10,7 +10,7 @@
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
  * @format
- *      
+ * @flow
  * @emails oncall+internationalization
  */
 
@@ -40,7 +40,7 @@ const PUNCT_CHAR_CLASS = ('[.!?' +
 '\u1801' + // Mongolian ellipsis
 '\u0E2F' + // Thai ellipsis
 '\uFF0E' + // Fullwidth full stop
-  ']'        );
+  ']': string);
 
 const ENDS_IN_PUNCT_REGEXP = new RegExp(
   PUNCT_CHAR_CLASS +
@@ -81,7 +81,7 @@ let _rules = [];
 let _lastLocale = null;
 let _rewrites = IntlPhonologicalRewrites.get(IntlViewerContext.locale);
 
-function _getRules()                                               {
+function _getRules(): Array<[RegExp, (string => string) | string]> {
   if (IntlViewerContext.locale && IntlViewerContext.locale !== _lastLocale) {
     _rules = [];
     _lastLocale = IntlViewerContext.locale;
@@ -120,7 +120,7 @@ function _getRules()                                               {
  *        "{name}(y)i...")
  * Returns: String with phonological rules applied (e.g., "Ozguri...")
  */
-function applyPhonologicalRules(text        )         {
+function applyPhonologicalRules(text: string): string {
   const rules = _getRules();
 
   for (let i = 0; i < rules.length; i++) {
@@ -138,7 +138,7 @@ function applyPhonologicalRules(text        )         {
  * the fact that we consider a string like "foo." to end with a period even
  * though there's a quote mark afterward.
  */
-function endsInPunct(str     )          {
+function endsInPunct(str: any): boolean {
   if (typeof str !== 'string') {
     return false;
   }
