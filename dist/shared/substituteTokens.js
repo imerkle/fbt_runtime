@@ -27,7 +27,7 @@ var invariant = require('invariant'); // This pattern finds tokens inside a stri
 var parameterRegexp = new RegExp('\\{([^}]+)\\}(' + IntlPunctuation.PUNCT_CHAR_CLASS + '*)', 'g'); // Hack into React internals to avoid key warnings
 
 function markAsSafeForReact(object) {
-  if (__DEV__) {
+  if (true) {
     // If this looks like a ReactElement, mark it as safe to silence any
     // key warnings.
     // I use a string key to avoid any possible private variable transforms.
@@ -58,7 +58,7 @@ function substituteTokens(template, _args) {
   var objectPieces = [];
   var argNames = [];
   var stringPieces = template.replace(parameterRegexp, function (match, parameter, punctuation) {
-    if (__DEV__) {
+    if (true) {
       if (!args.hasOwnProperty(parameter)) {
         throw new Error('Translatable string expects parameter ' + parameter);
       }

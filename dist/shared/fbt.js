@@ -217,7 +217,7 @@ fbt._ = function (table, args, options) {
   }
 };
 
-if (__DEV__) {
+if (true) {
   fbt._getCachedFbt = function (s) {
     return _cachedFbtResults[s];
   };
@@ -326,7 +326,7 @@ fbt._accessTable = function (table, args, argsIndex) {
 
 
 fbt._enum = function (value, range) {
-  if (__DEV__) {
+  if (true) {
     invariant(value in range, 'invalid value: %s', value);
   }
 

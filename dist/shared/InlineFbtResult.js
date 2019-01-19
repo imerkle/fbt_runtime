@@ -100,7 +100,7 @@ function (_FbtResultBaseImpl) {
       hash: hash
     };
 
-    if (__DEV__) {
+    if (true) {
       FbtReactUtil.defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), '_store', {
         validated: true
       });

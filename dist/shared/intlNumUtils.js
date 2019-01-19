@@ -392,7 +392,7 @@ var intlNumUtils = {
    */
   getIntegerString: function getIntegerString(num, thousandDelimiter) {
     if (thousandDelimiter === '') {
-      if (__DEV__) {
+      if (true) {
         throw new Error('thousandDelimiter cannot be empty string!');
       }
 

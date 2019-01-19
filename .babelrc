@@ -12,6 +12,15 @@
             {
                 "throwIfNamespace": false
             }
+        ],
+        ["minify-replace",
+            {"replacements": [{
+                "identifierName": "__DEV__",
+                "replacement": {
+                    "type": "booleanLiteral",
+                    "value": true
+                }}
+            ]}
         ]
-    ]           
+    ]
 }

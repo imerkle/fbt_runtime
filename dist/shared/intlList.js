@@ -39,7 +39,7 @@ var DELIMITERS = {
 };
 
 var intlList = function intlList(items, conjunction, delimiter) {
-  if (__DEV__) {
+  if (true) {
     items.forEach(function (item) {
       invariant(typeof item === 'string' || React.isValidElement(item), 'Must provide a string or ReactComponent to intlList.');
     });

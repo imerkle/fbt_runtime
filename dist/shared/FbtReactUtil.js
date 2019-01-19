@@ -18,7 +18,7 @@
 var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol.for && Symbol.for('react.element') || 0xeac7;
 var canDefineProperty = false;
 
-if (__DEV__) {
+if (true) {
   try {
     Object.defineProperty({}, 'x', {});
     canDefineProperty = true;
