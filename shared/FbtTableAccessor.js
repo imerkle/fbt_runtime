@@ -5,38 +5,38 @@
  * specific implementation.
  *
  * @emails oncall+internationalization
- * @flow strict-local
+ *       strict-local
  * @format
  */
 
 'use strict';
 
-type Substitution = {};
-type TableKey = string | number;
+                       
+                                
 
 const FbtTableAccessor = {
-  getEnumResult(value: string | number): [TableKey, ?Substitution] {
+  getEnumResult(value                 )                            {
     return [value, null];
   },
   getGenderResult(
-    variation: Array<string | number>,
-    substitution: ?Substitution,
-    value: number,
-  ): [Array<TableKey>, ?Substitution] {
+    variation                        ,
+    substitution               ,
+    value        ,
+  )                                   {
     // value is ignored here which will be used in alternative implementation
     // for different platform
     return [variation, substitution];
   },
   getNumberResult(
-    variation: Array<string | number>,
-    substitution: ?Substitution,
-    value: number,
-  ): [Array<TableKey>, ?Substitution] {
+    variation                        ,
+    substitution               ,
+    value        ,
+  )                                   {
     // value is ignored here which will be used in alternative implementation
     // for different platformf
     return [variation, substitution];
   },
-  getPronounResult(genderKey: number): [Array<TableKey>, ?Substitution] {
+  getPronounResult(genderKey        )                                   {
     return [[genderKey, '*'], null];
   },
 };

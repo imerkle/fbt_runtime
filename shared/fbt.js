@@ -13,7 +13,7 @@
  * Run the following command to sync the change from www to fbsource.
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
- * @flow
+ *      
  * @typechecks
  * @format
  * @emails oncall+internationalization
@@ -486,4 +486,4 @@ fbt.disableJsonExportMode = function() {
   jsonExportMode = false;
 };
 
-module.exports = ((fbt: $FlowFixMe): _FbtFactory_DO_NOT_USE);
+module.exports = ((fbt            )                        );

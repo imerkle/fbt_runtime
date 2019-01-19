@@ -1,7 +1,7 @@
 /**
  * Copyright 2004-present Facebook. All Rights Reserved.
  *
- * @flow
+ *      
  * @format
  *
  * Wrapper module for fbt.js (the implementation)
@@ -19,9 +19,9 @@ const FbsImpl = {
    * @see fbt._param()
    */
   _param(
-    label: string,
-    value: _FbsParam_DO_NOT_USE,
-    variations: [number, number],
+    label        ,
+    value                      ,
+    variations                  ,
   ) {
     // TODO(T36305131) Returning implicit Flow type until fbt.js is typed properly
     invariant(
@@ -41,4 +41,4 @@ const FbsImpl = {
   },
 };
 
-module.exports = ((FbsImpl: $FlowFixMe): _FbsFactory_DO_NOT_USE);
+module.exports = ((FbsImpl            )                        );

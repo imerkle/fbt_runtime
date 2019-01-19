@@ -10,7 +10,7 @@
  *   js1 upgrade www-shared -p fbt --remote localhost:~/www
  *
  * @format
- * @flow
+ *      
  * @emails oncall+internationalization
  */
 
@@ -19,72 +19,72 @@
 const invariant = require('invariant');
 
 // Similar to React$Node without `Iterable<React$Node>`
-export type FbtContentItem =
-  | boolean
-  | FbtElement
-  | FbtPureStringResult
-  | FbtString
-  | null
-  | number
-  // $FlowFixMe It's ok to get any React element
-  | React$Element<any>
-  | React$Portal
-  | string
-  | void;
+                            
+           
+              
+                       
+             
+        
+          
+                                                
+                      
+                
+          
+         
 
-export type NestedFbtContentItems = Array<
-  FbtContentItem | NestedFbtContentItems,
->;
+                                          
+                                         
+  
 
 let hasImplementedStringishMethods = false;
 
 // Named _FbtResultBase to avoid colliding with `FbtResultBase` class definition in Flow
-class _FbtResultBase implements IFbtResultBase {
-  _contents: NestedFbtContentItems;
-  _stringValue: ?string;
+class _FbtResultBase                           {
+                                   
+                        
 
   // Declare that we'll implement these methods
-  anchor: $PropertyType<IFbtResultBase, 'anchor'>;
-  big: $PropertyType<IFbtResultBase, 'big'>;
-  blink: $PropertyType<IFbtResultBase, 'blink'>;
-  bold: $PropertyType<IFbtResultBase, 'bold'>;
-  charAt: $PropertyType<IFbtResultBase, 'charAt'>;
-  charCodeAt: $PropertyType<IFbtResultBase, 'charCodeAt'>;
-  codePointAt: $PropertyType<IFbtResultBase, 'codePointAt'>;
-  contains: $PropertyType<IFbtResultBase, 'contains'>;
-  endsWith: $PropertyType<IFbtResultBase, 'endsWith'>;
-  fixed: $PropertyType<IFbtResultBase, 'fixed'>;
-  fontcolor: $PropertyType<IFbtResultBase, 'fontcolor'>;
-  fontsize: $PropertyType<IFbtResultBase, 'fontsize'>;
-  includes: $PropertyType<IFbtResultBase, 'includes'>;
-  indexOf: $PropertyType<IFbtResultBase, 'indexOf'>;
-  italics: $PropertyType<IFbtResultBase, 'italics'>;
-  lastIndexOf: $PropertyType<IFbtResultBase, 'lastIndexOf'>;
-  link: $PropertyType<IFbtResultBase, 'link'>;
-  localeCompare: $PropertyType<IFbtResultBase, 'localeCompare'>;
-  match: $PropertyType<IFbtResultBase, 'match'>;
-  normalize: $PropertyType<IFbtResultBase, 'normalize'>;
-  repeat: $PropertyType<IFbtResultBase, 'repeat'>;
-  replace: $PropertyType<IFbtResultBase, 'replace'>;
-  search: $PropertyType<IFbtResultBase, 'search'>;
-  slice: $PropertyType<IFbtResultBase, 'slice'>;
-  small: $PropertyType<IFbtResultBase, 'small'>;
-  split: $PropertyType<IFbtResultBase, 'split'>;
-  startsWith: $PropertyType<IFbtResultBase, 'startsWith'>;
-  strike: $PropertyType<IFbtResultBase, 'strike'>;
-  sub: $PropertyType<IFbtResultBase, 'sub'>;
-  substr: $PropertyType<IFbtResultBase, 'substr'>;
-  substring: $PropertyType<IFbtResultBase, 'substring'>;
-  sup: $PropertyType<IFbtResultBase, 'sup'>;
-  toLocaleLowerCase: $PropertyType<IFbtResultBase, 'toLocaleLowerCase'>;
-  toLocaleUpperCase: $PropertyType<IFbtResultBase, 'toLocaleUpperCase'>;
-  toLowerCase: $PropertyType<IFbtResultBase, 'toLowerCase'>;
-  toUpperCase: $PropertyType<IFbtResultBase, 'toUpperCase'>;
-  trim: $PropertyType<IFbtResultBase, 'trim'>;
-  trimLeft: $PropertyType<IFbtResultBase, 'trimLeft'>;
-  trimRight: $PropertyType<IFbtResultBase, 'trimRight'>;
+                                                  
+                                            
+                                                
+                                              
+                                                  
+                                                          
+                                                            
+                                                      
+                                                      
+                                                
+                                                        
+                                                      
+                                                      
+                                                    
+                                                    
+                                                            
+                                              
+                                                                
+                                                
+                                                        
+                                                  
+                                                    
+                                                  
+                                                
+                                                
+                                                
+                                                          
+                                                  
+                                            
+                                                  
+                                                        
+                                            
+                                                                        
+                                                                        
+                                                            
+                                                            
+                                              
+                                                      
+                                                        
 
-  constructor(contents: NestedFbtContentItems) {
+  constructor(contents                       ) {
     invariant(
       hasImplementedStringishMethods,
       'Stringish methods must be implemented. See `usingStringProxyMethod`.',
@@ -93,7 +93,7 @@ class _FbtResultBase implements IFbtResultBase {
     this._stringValue = null;
   }
 
-  flattenToArray(): Array<FbtContentItem> {
+  flattenToArray()                        {
     return _FbtResultBase.flattenToArray(this._contents);
   }
 
@@ -101,11 +101,11 @@ class _FbtResultBase implements IFbtResultBase {
     return this._contents;
   }
 
-  onStringSerializationError(content: FbtContentItem): void {
+  onStringSerializationError(content                )       {
     throw new Error('This method needs to be overridden by a child class');
   }
 
-  toString(): string {
+  toString()         {
     if (this._stringValue != null) {
       return this._stringValue;
     }
@@ -125,13 +125,13 @@ class _FbtResultBase implements IFbtResultBase {
     return stringValue;
   }
 
-  toJSON(): string {
+  toJSON()         {
     return this.toString();
   }
 
   static flattenToArray(
-    contents: NestedFbtContentItems,
-  ): Array<FbtContentItem> {
+    contents                       ,
+  )                        {
     const result = [];
     for (let ii = 0; ii < contents.length; ++ii) {
       const content = contents[ii];
@@ -148,8 +148,8 @@ class _FbtResultBase implements IFbtResultBase {
 
   static usingStringProxyMethod(
     // $FlowFixMe We can't easily map the string method name to its corresponding signature
-    stringProxyFn: (stringMethodName: $Keys<IFbtStringish>) => Function,
-  ): Class<_FbtResultBase> {
+    stringProxyFn                                                      ,
+  )                        {
     const currentClass = this;
     // Warning: The following methods are only appplicable during the transition
     // period for some existing code that uses string method on Fbt string.
@@ -206,4 +206,4 @@ class _FbtResultBase implements IFbtResultBase {
   }
 }
 
-module.exports = ((_FbtResultBase: $FlowFixMe): Class<FbtResultBase>);
+module.exports = ((_FbtResultBase            )                      );
