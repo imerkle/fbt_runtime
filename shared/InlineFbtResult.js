@@ -28,6 +28,7 @@ function em(content, inlineMode, translation, hash) {
   }
 
   return {
+    $$typeof: FbtReactUtil.REACT_ELEMENT_TYPE,
     type: 'em',
     key: null,
     ref: null,
@@ -59,6 +60,8 @@ const InlineFbtComponent = (props       )        =>
   
 
 class InlineFbtResult extends FbtResultBaseImpl {
+  $$typeof                                     =
+    FbtReactUtil.REACT_ELEMENT_TYPE;
   key          = null;
                
   ref                                = null;
