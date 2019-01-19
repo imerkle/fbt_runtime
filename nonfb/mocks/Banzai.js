@@ -1,10 +1,10 @@
 /**
  * Copyright 2004-present Facebook. All Rights Reserved.
  * @format
- *       strict-local
+ * @flow strict-local
  */
 const Banzai = {
-  post(name        , data     , options     )       {},
+  post(name: string, data: any, options: any): void {},
 };
 
 module.exports = Banzai;

@@ -1,13 +1,13 @@
 /**
  * Copyright 2004-present Facebook. All Rights Reserved.
  * @format
- *       strict-local
+ * @flow strict-local
  */
 
 const FBLogMessage = require('FBLogMessage');
 
 // No-op class implementation for Open Source
-function FBLogger(project        ) {
+function FBLogger(project: string) {
   return new FBLogMessage(project);
 }
 
