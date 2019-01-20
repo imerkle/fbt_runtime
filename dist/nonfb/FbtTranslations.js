@@ -11,7 +11,7 @@
 
 var IntlViewerContext = require('IntlViewerContext');
 
-var translatedFbts = module.parent.require('./translatedFbts.json');
+var translatedFbts = require('../../../../src/translatedFbts.json');
 
 function getTranslatedPayload(hashKey, enumHashKey, args) {
   var table = translatedFbts && translatedFbts[IntlViewerContext.locale];
