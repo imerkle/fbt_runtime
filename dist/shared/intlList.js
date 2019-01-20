@@ -61,11 +61,15 @@ var intlList = function intlList(items, conjunction, delimiter) {
   for (var i = 1; i < count - 1; ++i) {
     switch (delimiter) {
       case DELIMITERS.SEMICOLON:
-        output = fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{previous items}; {following items}\",\"desc\":\"A list of items of various types, for example: \\\"Menlo Park, CA; Seattle, WA; New York City, NY\\\". {previous items} and {following items} are themselves lists that contain one or more items.\",\"project\":\"intl-core\"}__FBT__", [fbt._param("previous items", output), fbt._param("following items", items[i])]);
+        output = fbt._("{previous items}; {following items}", [fbt._param("previous items", output), fbt._param("following items", items[i])], {
+          hk: "4hs4xq"
+        });
         break;
 
       default:
-        output = fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{previous items}, {following items}\",\"desc\":\"A list of items of various types. {previous items} and {following items} are themselves lists that contain one or more items.\",\"project\":\"intl-core\"}__FBT__", [fbt._param("previous items", output), fbt._param("following items", items[i])]);
+        output = fbt._("{previous items}, {following items}", [fbt._param("previous items", output), fbt._param("following items", items[i])], {
+          hk: "2z8RMb"
+        });
     }
   }
 
@@ -75,18 +79,26 @@ var intlList = function intlList(items, conjunction, delimiter) {
 function _getConjunction(list, lastItem, conjunction, delimiter) {
   switch (conjunction) {
     case CONJUNCTIONS.AND:
-      return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{list of items} and {last item}\",\"desc\":\"A list of items of various types, for example: \\\"item1, item2, item3 and item4\\\"\",\"project\":\"intl-core\"}__FBT__", [fbt._param("list of items", list), fbt._param("last item", lastItem)]);
+      return fbt._("{list of items} and {last item}", [fbt._param("list of items", list), fbt._param("last item", lastItem)], {
+        hk: "17bm9d"
+      });
 
     case CONJUNCTIONS.OR:
-      return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{list of items} or {last item}\",\"desc\":\"A list of items of various types, for example: \\\"item1, item2, item3 or item4\\\"\",\"project\":\"intl-core\"}__FBT__", [fbt._param("list of items", list), fbt._param("last item", lastItem)]);
+      return fbt._("{list of items} or {last item}", [fbt._param("list of items", list), fbt._param("last item", lastItem)], {
+        hk: "3q8AmB"
+      });
 
     case CONJUNCTIONS.NONE:
       switch (delimiter) {
         case DELIMITERS.SEMICOLON:
-          return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{previous items}; {last item}\",\"desc\":\"A list of items of various types, for example: \\\"Menlo Park, CA; Seattle, WA; New York City, NY\\\". {previous items} itself contains one or more items.\",\"project\":\"intl-core\"}__FBT__", [fbt._param("previous items", list), fbt._param("last item", lastItem)]);
+          return fbt._("{previous items}; {last item}", [fbt._param("previous items", list), fbt._param("last item", lastItem)], {
+            hk: "3i6hSW"
+          });
 
         default:
-          return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{list of items}, {last item}\",\"desc\":\"A list of items of various types, for example: \\\"item1, item2, item3, item4\\\"\",\"project\":\"intl-core\"}__FBT__", [fbt._param("list of items", list), fbt._param("last item", lastItem)]);
+          return fbt._("{list of items}, {last item}", [fbt._param("list of items", list), fbt._param("last item", lastItem)], {
+            hk: "3Q0iaX"
+          });
       }
 
     default:

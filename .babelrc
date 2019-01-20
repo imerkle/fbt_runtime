@@ -10,25 +10,31 @@
         "**/*.test.js"
     ],
     "plugins": [
-        "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-proposal-class-properties",
-        ["babel-plugin-fbt/index.js", {
-            "fbtEnumManifest": "",
-        }],
-        [
-            "@babel/plugin-transform-react-jsx",
+        ["minify-replace",
+            {
+                "replacements": [
+                    {
+                        "identifierName": "__DEV__",
+                        "replacement": {
+                            "type": "booleanLiteral",
+                            "value": true
+                        }
+                    }
+                ]
+            }
+        ],
+        ["@babel/plugin-transform-react-jsx",
             {
                 "throwIfNamespace": false
             }
+        ],        
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties",
+        ["babel-plugin-fbt/index.js",
+            {
+                "fbtEnumManifest": "",
+            }
         ],
-        ["minify-replace",
-            {"replacements": [{
-                "identifierName": "__DEV__",
-                "replacement": {
-                    "type": "booleanLiteral",
-                    "value": true
-                }}
-            ]}
-        ]
+        "babel-plugin-fbt-runtime/index.js",        
     ]
 }

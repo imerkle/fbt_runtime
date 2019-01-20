@@ -24,14 +24,22 @@ function formatNumber(value, decimals) {
 }
 
 function getAtLeastString(maxnumber, decimals) {
-  var result = fbt._("__FBT__{\"type\":\"table\",\"jsfbt\":{\"t\":{\"*\":\"{number}+\"},\"m\":[{\"token\":\"number\",\"type\":2}]},\"desc\":\"Label with meaning 'at least number'\",\"project\":\"locale_data\"}__FBT__", [fbt._param("number", intlNumUtils.formatNumberWithThousandDelimiters(maxnumber, decimals), [0, maxnumber])]); // after we start using CLDR data, it will not be fbt anymore.
+  var result = fbt._({
+    "*": "{number}+"
+  }, [fbt._param("number", intlNumUtils.formatNumberWithThousandDelimiters(maxnumber, decimals), [0, maxnumber])], {
+    hk: "2VPV74"
+  }); // after we start using CLDR data, it will not be fbt anymore.
 
 
   return result.toString();
 }
 
 function getLessThanString(minnumber, decimals) {
-  var result = fbt._("__FBT__{\"type\":\"table\",\"jsfbt\":{\"t\":{\"*\":\"<{number}\"},\"m\":[{\"token\":\"number\",\"type\":2}]},\"desc\":\"Label with meaning 'less than number'\",\"project\":\"locale_data\"}__FBT__", [fbt._param("number", intlNumUtils.formatNumberWithThousandDelimiters(minnumber, decimals), [0, minnumber])]); // after we start using CLDR data, it will not be fbt anymore.
+  var result = fbt._({
+    "*": "<{number}"
+  }, [fbt._param("number", intlNumUtils.formatNumberWithThousandDelimiters(minnumber, decimals), [0, minnumber])], {
+    hk: "1REuSN"
+  }); // after we start using CLDR data, it will not be fbt anymore.
 
 
   return result.toString();
