@@ -77,9 +77,9 @@ const intlList = function<TItem: React.Node>(
               '{previous items} and {following items} are themselves ' +
               'lists that contain one or more items.'
             }>
-            <fbtParam name="previous items">{output}</fbtParam>
+            <fbt:param name="previous items">{output}</fbt:param>
             {'; '}
-            <fbtParam name="following items">{items[i]}</fbtParam>
+            <fbt:param name="following items">{items[i]}</fbt:param>
           </fbt>
         );
         break;
@@ -91,9 +91,9 @@ const intlList = function<TItem: React.Node>(
               ' {following items} are themselves lists that contain one or' +
               ' more items.'
             }>
-            <fbtParam name="previous items">{output}</fbtParam>
+            <fbt:param name="previous items">{output}</fbt:param>
             {', '}
-            <fbtParam name="following items">{items[i]}</fbtParam>
+            <fbt:param name="following items">{items[i]}</fbt:param>
           </fbt>
         );
     }
@@ -116,9 +116,9 @@ function _getConjunction(
             'A list of items of various types, for example:' +
             ' "item1, item2, item3 and item4"'
           }>
-          <fbtParam name="list of items">{list}</fbtParam>
+          <fbt:param name="list of items">{list}</fbt:param>
           and
-          <fbtParam name="last item">{lastItem}</fbtParam>
+          <fbt:param name="last item">{lastItem}</fbt:param>
         </fbt>
       );
 
@@ -129,9 +129,9 @@ function _getConjunction(
             'A list of items of various types, for example:' +
             ' "item1, item2, item3 or item4"'
           }>
-          <fbtParam name="list of items">{list}</fbtParam>
+          <fbt:param name="list of items">{list}</fbt:param>
           or
-          <fbtParam name="last item">{lastItem}</fbtParam>
+          <fbt:param name="last item">{lastItem}</fbt:param>
         </fbt>
       );
 
@@ -145,9 +145,9 @@ function _getConjunction(
                 ' "Menlo Park, CA; Seattle, WA; New York City, NY". ' +
                 '{previous items} itself contains one or more items.'
               }>
-              <fbtParam name="previous items">{list}</fbtParam>
+              <fbt:param name="previous items">{list}</fbt:param>
               {'; '}
-              <fbtParam name="last item">{lastItem}</fbtParam>
+              <fbt:param name="last item">{lastItem}</fbt:param>
             </fbt>
           );
         default:
@@ -157,9 +157,9 @@ function _getConjunction(
                 'A list of items of various types, for example:' +
                 ' "item1, item2, item3, item4"'
               }>
-              <fbtParam name="list of items">{list}</fbtParam>
+              <fbt:param name="list of items">{list}</fbt:param>
               {', '}
-              <fbtParam name="last item">{lastItem}</fbtParam>
+              <fbt:param name="last item">{lastItem}</fbt:param>
             </fbt>
           );
       }

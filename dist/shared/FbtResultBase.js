@@ -189,8 +189,7 @@ function () {
     }
   }, {
     key: "usingStringProxyMethod",
-    value: function usingStringProxyMethod( // $FlowFixMe We can't easily map the string method name to its corresponding signature
-    stringProxyFn) {
+    value: function usingStringProxyMethod(stringProxyFn) {
       var currentClass = this; // Warning: The following methods are only appplicable during the transition
       // period for some existing code that uses string method on Fbt string.
       // The fbt string should be considered as the final string to be displayed

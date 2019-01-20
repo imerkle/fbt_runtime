@@ -61,23 +61,11 @@ var intlList = function intlList(items, conjunction, delimiter) {
   for (var i = 1; i < count - 1; ++i) {
     switch (delimiter) {
       case DELIMITERS.SEMICOLON:
-        output = React.createElement("fbt", {
-          desc: 'A list of items of various types, for example: ' + '"Menlo Park, CA; Seattle, WA; New York City, NY". ' + '{previous items} and {following items} are themselves ' + 'lists that contain one or more items.'
-        }, React.createElement("fbtParam", {
-          name: "previous items"
-        }, output), '; ', React.createElement("fbtParam", {
-          name: "following items"
-        }, items[i]));
+        output = fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{previous items}; {following items}\",\"desc\":\"A list of items of various types, for example: \\\"Menlo Park, CA; Seattle, WA; New York City, NY\\\". {previous items} and {following items} are themselves lists that contain one or more items.\",\"project\":\"intl-core\"}__FBT__", [fbt._param("previous items", output), fbt._param("following items", items[i])]);
         break;
 
       default:
-        output = React.createElement("fbt", {
-          desc: 'A list of items of various types. {previous items} and' + ' {following items} are themselves lists that contain one or' + ' more items.'
-        }, React.createElement("fbtParam", {
-          name: "previous items"
-        }, output), ', ', React.createElement("fbtParam", {
-          name: "following items"
-        }, items[i]));
+        output = fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{previous items}, {following items}\",\"desc\":\"A list of items of various types. {previous items} and {following items} are themselves lists that contain one or more items.\",\"project\":\"intl-core\"}__FBT__", [fbt._param("previous items", output), fbt._param("following items", items[i])]);
     }
   }
 
@@ -87,42 +75,18 @@ var intlList = function intlList(items, conjunction, delimiter) {
 function _getConjunction(list, lastItem, conjunction, delimiter) {
   switch (conjunction) {
     case CONJUNCTIONS.AND:
-      return React.createElement("fbt", {
-        desc: 'A list of items of various types, for example:' + ' "item1, item2, item3 and item4"'
-      }, React.createElement("fbtParam", {
-        name: "list of items"
-      }, list), "and", React.createElement("fbtParam", {
-        name: "last item"
-      }, lastItem));
+      return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{list of items} and {last item}\",\"desc\":\"A list of items of various types, for example: \\\"item1, item2, item3 and item4\\\"\",\"project\":\"intl-core\"}__FBT__", [fbt._param("list of items", list), fbt._param("last item", lastItem)]);
 
     case CONJUNCTIONS.OR:
-      return React.createElement("fbt", {
-        desc: 'A list of items of various types, for example:' + ' "item1, item2, item3 or item4"'
-      }, React.createElement("fbtParam", {
-        name: "list of items"
-      }, list), "or", React.createElement("fbtParam", {
-        name: "last item"
-      }, lastItem));
+      return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{list of items} or {last item}\",\"desc\":\"A list of items of various types, for example: \\\"item1, item2, item3 or item4\\\"\",\"project\":\"intl-core\"}__FBT__", [fbt._param("list of items", list), fbt._param("last item", lastItem)]);
 
     case CONJUNCTIONS.NONE:
       switch (delimiter) {
         case DELIMITERS.SEMICOLON:
-          return React.createElement("fbt", {
-            desc: 'A list of items of various types, for example:' + ' "Menlo Park, CA; Seattle, WA; New York City, NY". ' + '{previous items} itself contains one or more items.'
-          }, React.createElement("fbtParam", {
-            name: "previous items"
-          }, list), '; ', React.createElement("fbtParam", {
-            name: "last item"
-          }, lastItem));
+          return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{previous items}; {last item}\",\"desc\":\"A list of items of various types, for example: \\\"Menlo Park, CA; Seattle, WA; New York City, NY\\\". {previous items} itself contains one or more items.\",\"project\":\"intl-core\"}__FBT__", [fbt._param("previous items", list), fbt._param("last item", lastItem)]);
 
         default:
-          return React.createElement("fbt", {
-            desc: 'A list of items of various types, for example:' + ' "item1, item2, item3, item4"'
-          }, React.createElement("fbtParam", {
-            name: "list of items"
-          }, list), ', ', React.createElement("fbtParam", {
-            name: "last item"
-          }, lastItem));
+          return fbt._("__FBT__{\"type\":\"text\",\"jsfbt\":\"{list of items}, {last item}\",\"desc\":\"A list of items of various types, for example: \\\"item1, item2, item3, item4\\\"\",\"project\":\"intl-core\"}__FBT__", [fbt._param("list of items", list), fbt._param("last item", lastItem)]);
       }
 
     default:

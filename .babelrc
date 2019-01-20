@@ -4,9 +4,17 @@
         "@babel/preset-react",
         "@babel/preset-flow"
     ],
+    "ignore": [
+        "**/__mocks__",
+        "**/__tests__",
+        "**/*.test.js"
+    ],
     "plugins": [
         "@babel/plugin-proposal-object-rest-spread",
         "@babel/plugin-proposal-class-properties",
+        ["babel-plugin-fbt/index.js", {
+            "fbtEnumManifest": "",
+        }],
         [
             "@babel/plugin-transform-react-jsx",
             {

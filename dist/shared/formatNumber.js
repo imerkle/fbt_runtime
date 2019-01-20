@@ -24,25 +24,15 @@ function formatNumber(value, decimals) {
 }
 
 function getAtLeastString(maxnumber, decimals) {
-  var result = React.createElement("fbt", {
-    desc: "Label with meaning 'at least number'",
-    project: "locale_data"
-  }, React.createElement("fbtParam", {
-    name: "number",
-    number: maxnumber
-  }, intlNumUtils.formatNumberWithThousandDelimiters(maxnumber, decimals)), "+"); // after we start using CLDR data, it will not be fbt anymore.
+  var result = fbt._("__FBT__{\"type\":\"table\",\"jsfbt\":{\"t\":{\"*\":\"{number}+\"},\"m\":[{\"token\":\"number\",\"type\":2}]},\"desc\":\"Label with meaning 'at least number'\",\"project\":\"locale_data\"}__FBT__", [fbt._param("number", intlNumUtils.formatNumberWithThousandDelimiters(maxnumber, decimals), [0, maxnumber])]); // after we start using CLDR data, it will not be fbt anymore.
+
 
   return result.toString();
 }
 
 function getLessThanString(minnumber, decimals) {
-  var result = React.createElement("fbt", {
-    desc: "Label with meaning 'less than number'",
-    project: "locale_data"
-  }, "<", React.createElement("fbtParam", {
-    name: "number",
-    number: minnumber
-  }, intlNumUtils.formatNumberWithThousandDelimiters(minnumber, decimals))); // after we start using CLDR data, it will not be fbt anymore.
+  var result = fbt._("__FBT__{\"type\":\"table\",\"jsfbt\":{\"t\":{\"*\":\"<{number}\"},\"m\":[{\"token\":\"number\",\"type\":2}]},\"desc\":\"Label with meaning 'less than number'\",\"project\":\"locale_data\"}__FBT__", [fbt._param("number", intlNumUtils.formatNumberWithThousandDelimiters(minnumber, decimals), [0, minnumber])]); // after we start using CLDR data, it will not be fbt anymore.
+
 
   return result.toString();
 }
