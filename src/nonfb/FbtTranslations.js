@@ -12,7 +12,7 @@
 
 const IntlViewerContext = require('IntlViewerContext');
 
-const translatedFbts = module.parent.require('./translatedFbts.json');
+const translatedFbts = module.parent.require('../../../../src/translatedFbts.json');
 
 function getTranslatedPayload(
   hashKey: ?string,
